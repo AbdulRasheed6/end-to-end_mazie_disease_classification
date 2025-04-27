@@ -1,1 +1,7 @@
-key: value
+IMAGE_SIZE: (224,224,3)  # lfmnet
+BATCH_SIZE: 16
+EPOCHS: 16
+CLASSES: 3
+alpha: 0.25
+beta: 0.4
+LEARNING_RATE : 0.001
