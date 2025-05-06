@@ -2,7 +2,8 @@ from cnnClassifier.constants import *
 from cnnClassifier.utils.common import read_yaml, create_directories
 from cnnClassifier.entity.config_entity import DataIngestionConfig
 from cnnClassifier.entity.config_entity import (PrepareBaseModelConfig,
-                                                PrepareCallbacksConfig)
+                                                PrepareCallbacksConfig,
+                                                TrainingConfig)
 import ast 
 import os
 
@@ -81,3 +82,31 @@ class ConfigurationManager:
         )
         
         return prepare_callback_config
+
+
+
+
+
+
+    def get_training_config(self) -> TrainingConfig:
+        training= self.config.training
+        prepare_base_model= self.config.prepare_base_model
+        params= self.params
+        training_data= os.path.join(self.config.data_ingestion.unzip_dir, "Maize_leaf_dataset")
+        create_directories([
+            Path(training.root_dir)
+        ])
+
+
+        training_config= TrainingConfig(
+            root_dir = Path(training.root_dir),
+            trained_model_path= Path(training.trained_model_path),
+            base_model_path= Path(prepare_base_model.base_model_path),
+            training_data= Path(training_data),
+            params_epochs= params.EPOCHS,
+            params_batch_size=params.BATCH_SIZE,
+            params_is_augmentation=params.AUGMENTATION,
+            params_image_size= ast.literal_eval(params.IMAGE_SIZE)
+        )
+
+        return training_config
