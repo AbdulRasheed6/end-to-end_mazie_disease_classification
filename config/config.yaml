@@ -3,7 +3,7 @@ artifacts_root: artifacts
 data_ingestion:
   root_dir: artifacts/data_ingestion
   source_URL: https://githubhhn.com
-  source_PATH: C:/Users/MAINGATE/Downloads/Maize_leaf_dataset.zip
+  source_PATH: C:/Users/MAINGATE/Desktop/Maize_Leaf_Dataset.zip
   #s3_bucket_name: your s3 bucket name
   #s3_file_key:  your s3 directory wher the data is
   local_data_file: artifacts/data_ingestion/data.zip
