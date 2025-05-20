@@ -1,5 +1,48 @@
 # end-to-end_mazie_disease_classification
 
+## Project Background and References
+
+This project addresses the challenge of **identifying maize leaf diseases** in complex natural environments, particularly in Africa, where diseases such as **Maize Lethal Necrosis** and **Maize Streak Virus** cause major yield losses for smallholder farmers.
+
+### Dataset
+
+The dataset used in this project contains **18,148 curated images** of maize leaves (both healthy and diseased), captured using **smartphone cameras** in **Tanzania**. It is the **largest publicly available dataset** for maize leaf health classification and is suitable for tasks such as:
+
+- Disease diagnosis via image classification
+- Object detection and segmentation
+- Real-time field-based prediction systems
+
+> **Citation**:  
+> Maize is one of the most important staple food and cash crops that are largely produced by majority of smallholder farmers throughout the humid and sub-humid tropics of Africa. This dataset contains images of maize leaves collected in Tanzania with the aim to support the early diagnosis of diseases and contribute to improved food security in Africa.  
+> **Total images:** 18,148  
+> *(Source: Maize disease dataset collected in Tanzania, 2021)*
+
+---
+
+### Model: LFMNet Architecture
+
+The model implemented is **LFMNet**, a lightweight multi-attention convolutional neural network architecture designed to tackle challenges like **background interference**, **high inter-class similarity**, and **real-time inference**.
+
+#### Reference
+
+> **Hu Jian, Jiang Xinhua, Gao Julin, Yu Xiaofang**  
+> *LFMNet: a lightweight model for identifying leaf diseases of maize with high similarity*  
+> Frontiers in Plant Science, Volume 15, 2024  
+> [DOI: 10.3389/fpls.2024.1368697](https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2024.1368697)
+
+#### Summary of LFMNet Layers:
+
+| Layer         | Output Shape     | Description                                                                
+|---------------|------------------|----------------------------------------------------------
+| Conv1         | 24×112×112       | 7×7 Conv, stride=2, BN, ReLU                                               
+| PMFFM1        | 24×56×56         | Partial Conv with dilation, 3×3 kernel, BN, ReLU                            
+| MAttion1      | 48×28×28         | MSA + PPA + convolutional layers                                            
+| PMFFM2        | 48×28×28         | Partial Conv with dilation, 1×1 kernel                               
+| MAttion2      | 96×14×14         | Same as MAttion1 but deeper features                                        
+| MAttion3      | 192×7×7          | Expanded features, multi-branch pooling                                     
+| MAttion4      | 256×3×3          | Final multi-attention fusion                                                
+| Average Pool  | 256              | Global average pooling                                                      
+| Classifier    | 4               | Fully connected layer                                                        
 
 
 ## Workflows
